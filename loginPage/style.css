@@ -1,0 +1,238 @@
+:root{
+    --white:#fff;
+    --black:#000;
+    --black-700: rgba(0,0,0,0.25);
+    --black-800: rgba(0,0,0,0.22);
+
+    --bg-color:#f6f5f7;
+
+    --orange-300:#ff4b2b;
+    --pink-400:#ff41c6;
+
+    --gray-700:#333;
+    --gray-300:#ddd;
+    --gray-200:#eee;
+}
+*{
+    box-sizing: border-box;
+    /* scroll-behavior: smooth; */
+}
+body{
+    background-color: var(--bg-color);
+    display: flex;
+    /* n precisar criar varios displays */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* centraliza tudo */
+    font-family: 'Montserrat Alternates', sans-serif;
+    height: 100vh;
+    width: 100vh;
+    overflow: hidden;
+}
+h1{
+    font-weight: bold;
+    margin: 0;
+}
+h2{
+    text-align: center;
+}
+p{
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 50px;
+    color:var(--white)
+}
+
+span{
+    font-size: 12px;
+}
+a{
+    color: var(--gray-700);
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+button{
+    border-radius: 20px;
+    border: 1px solid var(--orange-300);
+    background-color:  var(--orange-300);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: bold;
+    padding: 12px 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    font-family: 'Montserrat Alternates', sans-serif;
+    cursor: pointer;
+
+    /* transição para o botão aumentar */
+    transition: transform 80ms ease-in;
+
+}
+/* diminui o tamanha/muda o tamanho quando clicar */
+button:active{
+    transform: scale(0.95);
+}
+/* para tirar a bordar do botão quando clicamos ou passamos o  mouse */
+button:focus{
+    outline: none;
+}
+button.ghost{
+    background-color: transparent;
+    border-color: var(--white);
+}
+form{
+    background-color: var(--white);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   padding: 0 50px;
+   height: 100%;
+   text-align: center;
+}
+
+input{
+background-color: var(--gray-200);
+   border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 89%;
+    outline: none;
+    color: var(--black);
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+.container{
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 14px 20px var(--black-700) 0 10px 10px var(--black-800);
+    /* position relative: vai ser para caixa principal e o absolute para o elemento dentro não fugir da caixa */
+    position: relative;
+    overflow: none;
+    width: 760px;
+    max-width: 100%;
+    min-height: 480px;
+}
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+
+    /* animação quando tiver a mudança da classe no JavaScript */
+    transition: all 0.6s ease-in-out;
+}
+.sign-in-container{
+    left: 0;
+    width: 50%;
+    /* parte da sobreposição do elemtos */
+    /* o maior é que irá aparecer na frente(tem que está com o absolute os que tá com zero para ficar atrá de uma vez) */
+    z-index: 2;
+}
+/* sobreeescrever a classe */
+.container.right-panel-active .sign-up-container{
+    transform: translateX(0%);
+    opacity: 1;
+    z-index: 5;
+
+    /* animação com o keyframe */
+/* usar a proriedade,escolhe aanimação e a duração */
+    animation: show 0.6s;
+    /* ai vaipara o @keyframes */
+}
+@keyframes show{
+    0%,49.99%{
+        opacity: 0;
+        z-index: 5;
+    }
+    50%,100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.overlay-container{
+    position: absolute;
+    top:0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 100;
+    /* as animações que vai usar javascript,mas no caso vai aparecer na frente pelo que entendi,ai vai acontecer quando houver a mudança de classe com javascript */
+
+    transition:  transform 0.6s ease-in-out;
+}
+
+.container.right.panel-active .overlay-container{
+    transform: translateX(100%);
+}
+
+.overlay{
+    /* background: var(--pink-400); */
+    /* o -moz=mozila/ webkit= chrome/ o-opera*/
+
+    background: -webkit-linear-gradient(to right, var(--orange-300),var(--pink-400));
+    background: linear-gradient(to right, var(--orange-300),var(--pink-400));
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: 0 0;
+    /* para alterar as duas coisas no overlay */
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    /* efeito com classe em js */
+    transition: transform 0.6s ease-in;
+
+}
+.container.right-panel-active .overlay{
+    transform: translateX(50%);
+}
+.overlay-panel{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top:0;
+    height: 100%;
+    width: 50%;
+
+    transition:  transform 0.6s ease-in-out;
+}
+
+.overlay-left{
+    transform: translateX(0%);
+}
+
+.overlay-right{
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.container.right-panel-active.overlay-left{
+    transform: translateX(0);
+}
+.container.container.right-panel-active.overlay-left{
+    transform: translateX(20%);
+}
+.social-container{
+    margin: 20px 0;
+}
+.social-container a{
+    border: 1px solid var(--gray-300);
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
