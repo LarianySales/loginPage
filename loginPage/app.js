@@ -15,7 +15,27 @@ signInButton.addEventListener("click",()=>{
 });
 
 const email1 = document.getElementById('email1')
-const usuario = document.getAnimations('nome')
-const senha1 = document.getElementById('senha1')
+const usuario = document.getElementById('nome')
+const senha1 = document.getElementById('senha-1')
 
-const btnCadastro = document.getElementById('cadastro')
+const senha = senha1.value
+const email = email1.value
+const nome = usuario.value
+
+
+const btnCadastro = document.getElementById("cadastro")
+
+btnCadastro.addEventListener('click', ()=>{
+if(nome == ''){
+    alert("Coloque o seu nome por favor")
+}
+
+ if(email == ''){
+    alert("Preencha o campo de email")
+}
+else if(senha == ''){
+    alert("Digite sua senha")
+}
+
+})
+
